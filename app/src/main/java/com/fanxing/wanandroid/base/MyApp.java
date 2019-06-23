@@ -16,19 +16,23 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)){
+        //全局公共类初始化
+        Global.init(this);
+        //Leakcanar内存溢出检测  初始化
+        if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
-        }else {
+        } else {
             refWatcher = LeakCanary.install(this);
         }
     }
 
     /**
      * Leakcanar内存溢出检测 由Activity获得一个引用观察者对象来监测
+     *
      * @param context
      * @return
      */
-    public static RefWatcher getRefWatcher(Context context){
+    public static RefWatcher getRefWatcher(Context context) {
         MyApp myApp = (MyApp) context.getApplicationContext();
         return myApp.refWatcher;
     }

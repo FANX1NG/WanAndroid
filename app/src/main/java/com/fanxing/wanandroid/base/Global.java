@@ -15,10 +15,10 @@ import android.widget.Toast;
  */
 public class Global {
 
-    private static Context mContext;
-    private static float mDensity;
-    private static int mScreenHeight;
-    private static int mScreenWidth;
+    public static Context mContext;
+    public static float mDensity;
+    public static int mScreenHeight;
+    public static int mScreenWidth;
 
     public static void init(Context context) {
         mContext = context;
