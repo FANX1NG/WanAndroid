@@ -26,7 +26,7 @@ public class DataManager extends BaseProtocol{
      * @param page 页码
      */
     public void getArticleList(HttpCallback callback, CompositeDisposable compositeDisposable, int page){
-        super.execute(mRetrofitService.getArticlelist(page),RetrofitService.HTTP_GET_ARTICLE_LIST,callback, ArticleListBean.class,compositeDisposable);
+        super.execute(mRetrofitService.getArticleList(page),RetrofitService.HTTP_GET_ARTICLE_LIST,callback, ArticleListBean.class,compositeDisposable);
     }
 
     /**

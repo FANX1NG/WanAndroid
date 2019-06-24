@@ -3,15 +3,12 @@ package com.fanxing.wanandroid.protocol;
 
 import com.google.gson.JsonObject;
 
-
 import java.util.Map;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -32,7 +29,7 @@ public interface RetrofitService {
      * @return
      */
     @GET("article/list/{page}/json")
-    Observable<JsonObject> getArticlelist(@Path("page") int page);
+    Observable<JsonObject> getArticleList(@Path("page") int page);
 
 
     /**

@@ -1,5 +1,6 @@
 package com.fanxing.wanandroid.ui.activity;
 
+import android.os.Message;
 import android.view.View;
 
 import com.fanxing.wanandroid.R;
@@ -47,7 +48,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
     }
 
     @Override
