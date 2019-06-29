@@ -1,7 +1,11 @@
 package com.fanxing.wanandroid.ui.activity;
 
-import android.os.Message;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseActivity;
@@ -19,7 +23,6 @@ import butterknife.Unbinder;
  */
 public class MainActivity extends BaseActivity {
 
-
     @BindView(R.id.navigation_bar)
     BottomTabBar navigationBar;
     private Unbinder mBind;
@@ -34,14 +37,15 @@ public class MainActivity extends BaseActivity {
         //ButterKnife绑定
         mBind = ButterKnife.bind(this);
         //使用BottomTabBar绑定Fragment进行显示
-        navigationBar.init(getSupportFragmentManager(), Global.mScreenWidth, Global.mScreenHeight)
-//                .setImgSize(70, 70)
-//                .setFontSize(14)
-//                .setTabPadding(5, 0, 5)
-//                .setChangeColor(Color.parseColor("#FF00F0"),Color.parseColor("#CCCCCC"))
-                .addTabItem("第一项", R.mipmap.ic_launcher, LoginFragment.class)
+        navigationBar.init(getSupportFragmentManager(), Global.mScreenWidth/2, Global.mScreenHeight/2)
+                .setImgSize(50, 50)
+                .setFontSize(16)
+                .setTabPadding(5, 0, 5)
+                .setChangeColor(Color.parseColor("#FF00F0"),Color.parseColor("#CCCCCC"))
+                .addTabItem("首页", R.mipmap.ic_launcher, LoginFragment.class)
                 .addTabItem("第二项",  R.mipmap.ic_launcher, HomeFragment.class)
                 .addTabItem("第三项",  R.mipmap.ic_launcher, LoginFragment.class)
+                .addTabItem("我的",R.mipmap.ic_launcher,HomeFragment.class)
                 .isShowDivider(true);
 
     }
@@ -67,4 +71,5 @@ public class MainActivity extends BaseActivity {
         //解除绑定防止内存溢出
         mBind.unbind();
     }
+
 }

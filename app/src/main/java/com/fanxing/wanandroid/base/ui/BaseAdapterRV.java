@@ -25,18 +25,21 @@ public abstract class BaseAdapterRV<T> extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        return createViewHolder(context,viewGroup,viewType);
+        return createViewHolder(context, viewGroup, viewType);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+        BaseHolderRV<T> baseHolder = (BaseHolderRV<T>) viewHolder;
+        T bean = getItem(i);
+        baseHolder.refreshView(bean, i);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listData == null ? 0 : listData.size();
     }
+
     /**
      * 创建holder对象
      *

@@ -21,7 +21,12 @@ public interface RetrofitService {
     /** 表示请求的类型，这是获取首页头部信息的请求类型 */
     int HTTP_GET_ARTICLE_LIST = 1;
     /** 登录数据类型 */
-    int HTTP_LOGIN = 2;
+    int HTTP_POST_LOGIN = 2;
+    /** 首页Banner类型 */
+    int HTTP_GET_BANNER = 3;
+    /** 顶置文章类型 */
+    int HTTP_GET_TOP = 4;
+
 
     /**
      * 请求首页文章
@@ -41,4 +46,18 @@ public interface RetrofitService {
     @POST("user/login")
     @FormUrlEncoded
     Observable<JsonObject> getLoginData(@FieldMap Map<String, String> namePassword);
+
+    /**
+     * 首页Banner
+     * @return
+     */
+    @GET("banner/json")
+    Observable<JsonObject> getBanneData();
+
+    /**
+     * 置顶文章
+     * @return
+     */
+    @GET("article/top/json")
+    Observable<JsonObject> getTopData();
 }

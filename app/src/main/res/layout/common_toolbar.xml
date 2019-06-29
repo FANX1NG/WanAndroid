@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="?attr/colorPrimary">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.flyco.tablayout.SegmentTabLayout
+            android:id="@+id/segmentTabLayout"
+            android:layout_width="160dp"
+            android:layout_height="32dp"
+            tl:layout_constraintBottom_toBottomOf="parent"
+            tl:layout_constraintEnd_toEndOf="parent"
+            tl:layout_constraintStart_toStartOf="parent"
+            tl:layout_constraintTop_toTopOf="parent"
+            tl:tl_bar_color="#ffffff"
+            tl:tl_indicator_anim_enable="true"
+            tl:tl_indicator_color="@color/colorPrimary"
+            tl:tl_indicator_margin_bottom="2dp"
+            tl:tl_indicator_margin_left="2dp"
+            tl:tl_indicator_margin_right="2dp"
+            tl:tl_indicator_margin_top="2dp">
+
+        </com.flyco.tablayout.SegmentTabLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.Toolbar>

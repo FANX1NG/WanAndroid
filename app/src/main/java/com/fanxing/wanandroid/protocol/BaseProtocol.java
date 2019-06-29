@@ -97,6 +97,6 @@ public class BaseProtocol {
 
     public <T> void execute(Observable<JsonObject> call, final int reqType,
                             final HttpCallback callback, final Class<T> clazz, CompositeDisposable compositeDisposable) {
-        execute(call, reqType, callback, clazz, compositeDisposable, 0);
+        execute(call, reqType, callback, clazz, compositeDisposable, -1);
     }
 }

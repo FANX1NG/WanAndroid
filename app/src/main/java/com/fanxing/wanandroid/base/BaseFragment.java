@@ -66,7 +66,9 @@ public abstract class BaseFragment extends Fragment implements UIOperation, Http
      * @param forceUpdate 强制更新，好像没什么用？
      */
     public void prepareFetchData(boolean forceUpdate) {
-        if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
+        //如果 视图界面可见了 且 初始化过布局了 且 （如果没有加载过数据 或者 要强制更新数据）  就进行懒加载
+        boolean b = !isDataInitiated || forceUpdate;
+        if (isVisibleToUser && isViewInitiated && b) {
             loadData();
             isDataInitiated = true;
         }

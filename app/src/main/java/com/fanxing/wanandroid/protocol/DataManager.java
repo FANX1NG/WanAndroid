@@ -2,7 +2,11 @@ package com.fanxing.wanandroid.protocol;
 
 import com.fanxing.wanandroid.base.HttpCallback;
 import com.fanxing.wanandroid.model.bean.ArticleListBean;
+import com.fanxing.wanandroid.model.bean.BannerBean;
 import com.fanxing.wanandroid.model.bean.LoginBean;
+import com.fanxing.wanandroid.model.bean.TopBean;
+import com.youth.banner.Banner;
+
 import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,7 +30,7 @@ public class DataManager extends BaseProtocol{
      * @param page 页码
      */
     public void getArticleList(HttpCallback callback, CompositeDisposable compositeDisposable, int page){
-        super.execute(mRetrofitService.getArticleList(page),RetrofitService.HTTP_GET_ARTICLE_LIST,callback, ArticleListBean.class,compositeDisposable);
+        super.execute(mRetrofitService.getArticleList(page),RetrofitService.HTTP_GET_ARTICLE_LIST,callback, ArticleListBean.class,compositeDisposable,page);
     }
 
     /**
@@ -36,7 +40,27 @@ public class DataManager extends BaseProtocol{
      * @param namePassword 用户名和密码
      */
     public void getLoginData(HttpCallback callback,CompositeDisposable compositeDisposable,Map<String,String>namePassword){
-        super.execute(mRetrofitService.getLoginData(namePassword),RetrofitService.HTTP_LOGIN,callback, LoginBean.class,compositeDisposable);
+        super.execute(mRetrofitService.getLoginData(namePassword),RetrofitService.HTTP_POST_LOGIN,callback, LoginBean.class,compositeDisposable);
     }
+
+    /**
+     * 请求首页Banner数据
+     * @param callback
+     * @param compositeDisposable
+     */
+    public void getBannerData(HttpCallback callback,CompositeDisposable compositeDisposable){
+        super.execute(mRetrofitService.getBanneData(),RetrofitService.HTTP_GET_BANNER,callback, BannerBean.class,compositeDisposable);
+    }
+
+    /**
+     * 请求首页顶置文章数据
+     * @param callback
+     * @param compositeDisposable
+     */
+    public void getTopData(HttpCallback callback,CompositeDisposable compositeDisposable){
+        super.execute(mRetrofitService.getTopData(),RetrofitService.HTTP_GET_TOP,callback, TopBean.class,compositeDisposable);
+    }
+
+
 
 }

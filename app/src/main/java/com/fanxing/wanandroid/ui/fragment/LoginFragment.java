@@ -17,16 +17,15 @@ import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseFragment;
 import com.fanxing.wanandroid.model.bean.LoginBean;
 import com.fanxing.wanandroid.presenter.LoginFragmentPresenter;
-import com.fanxing.wanandroid.util.LogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 
 /**
+ * 登录页
  * @author 繁星
  */
 public class LoginFragment extends BaseFragment {
@@ -159,6 +158,5 @@ public class LoginFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         presenter.onStop();
-        LogUtil.i(getTag());
     }
 }
