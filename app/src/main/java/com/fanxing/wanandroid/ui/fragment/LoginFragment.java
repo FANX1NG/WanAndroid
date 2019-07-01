@@ -87,11 +87,7 @@ public class LoginFragment extends BaseFragment {
         });
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-    }
 
     @Override
     public void onClick(View v, int id) {
@@ -147,16 +143,10 @@ public class LoginFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        return rootView;
-    }
-
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         presenter.onStop();
     }
 }

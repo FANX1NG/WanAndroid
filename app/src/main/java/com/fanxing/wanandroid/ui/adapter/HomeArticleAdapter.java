@@ -8,18 +8,18 @@ import com.fanxing.wanandroid.base.ui.BaseHolderRV;
 import com.fanxing.wanandroid.model.bean.ArticleListBean;
 import com.fanxing.wanandroid.model.bean.BannerBean;
 import com.fanxing.wanandroid.model.bean.TopBean;
-import com.fanxing.wanandroid.ui.holder.ArticleHolder;
-import com.fanxing.wanandroid.ui.holder.BannerHolder;
-import com.fanxing.wanandroid.ui.holder.TopHolder;
+import com.fanxing.wanandroid.ui.holder.HomeArticleHolder;
+import com.fanxing.wanandroid.ui.holder.HomeBannerHolder;
+import com.fanxing.wanandroid.ui.holder.HomeTopHolder;
 
 import java.util.List;
 
 /**
- * 首页最新项目的RecyclerView适配器
+ * 首页最新文章的RecyclerView适配器
  *
  * @author 繁星
  */
-public class ArticleAdapter extends BaseAdapterRV {
+public class HomeArticleAdapter extends BaseAdapterRV {
     /** 列表项：banner类型 */
     private static final int ITEM_TYPE_BANNER = 0;
     /** 列表项：最新博文类型 */
@@ -27,7 +27,7 @@ public class ArticleAdapter extends BaseAdapterRV {
     /** 列表项：顶置文章类型 */
     private static final int ITEM_TYPE_TOP = 2;
 
-    public ArticleAdapter(Context context, List listData) {
+    public HomeArticleAdapter(Context context, List listData) {
         super(context, listData);
     }
 
@@ -36,11 +36,11 @@ public class ArticleAdapter extends BaseAdapterRV {
         //判断数据类型来使用哪一种itemHolder
         switch (viewType) {
             case ITEM_TYPE_BANNER:
-                return new BannerHolder(context, parent, this, viewType);
+                return new HomeBannerHolder(context, parent, this, viewType);
             case ITEM_TYPE_ARTICLE:
-                return new ArticleHolder(context, parent, this, viewType);
+                return new HomeArticleHolder(context, parent, this, viewType);
             case ITEM_TYPE_TOP:
-                return new TopHolder(context,parent,this,viewType);
+                return new HomeTopHolder(context,parent,this,viewType);
             default:
                 throw new IllegalStateException("找不到指定类型的Holder");
         }

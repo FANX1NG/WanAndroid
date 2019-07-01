@@ -1,6 +1,9 @@
 package com.fanxing.wanandroid.base;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -38,6 +41,68 @@ public class Global {
      */
     public static int dp2px(int dp) {
         return (int) (dp * mDensity);
+    }
+    /**
+     * dp转换px
+     * @param pxValue px参数
+     * @return
+     */
+    public static float px2dp(float pxValue) {
+        return (pxValue/ mDensity);
+    }
+    /**
+     * 创建一个shape
+     *
+     *
+     * @param shape
+     * @param strokeWidth 边框宽度(px)
+     * @param roundRadius 圆角半径(px)
+     * @param strokeColor 边框颜色
+     * @param fillColor   内部填充颜色
+     * @return GradientDrawable
+     */
+    public static GradientDrawable createShape(int shape, int strokeWidth, int roundRadius, int strokeColor, int fillColor) {
+        GradientDrawable gd = new GradientDrawable();
+        gd.setShape(shape);
+        gd.setColor(fillColor);
+        gd.setCornerRadius(roundRadius);
+        gd.setStroke(strokeWidth, strokeColor);
+        return gd;
+    }
+
+    /**
+     * 创建按钮文字点击样式
+     *
+     * @param normal  正常样式
+     * @param pressed 按下样式
+     * @param focused 焦点样式
+     * @param unable  不可用样式
+     * @return ColorStateList
+     */
+    public static ColorStateList createColorStateList(int normal, int pressed, int focused, int unable) {
+        int[] colors = new int[]{pressed, focused, normal, focused, unable, normal};
+        int[][] states = new int[6][];
+        states[0] = new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled};
+        states[1] = new int[]{android.R.attr.state_enabled, android.R.attr.state_focused};
+        states[2] = new int[]{android.R.attr.state_enabled};
+        states[3] = new int[]{android.R.attr.state_focused};
+        states[4] = new int[]{android.R.attr.state_window_focused};
+        states[5] = new int[]{};
+        return new ColorStateList(states, colors);
+    }
+
+    /**
+     * 创建按钮点击样式
+     *
+     * @param unSelected 未点击样式
+     * @param selected 点击样式
+     * @return StateListDrawable
+     */
+    public static StateListDrawable createStateListDrawable(GradientDrawable unSelected, GradientDrawable selected) {
+        StateListDrawable drawable = new StateListDrawable();
+        drawable.addState(new int[]{android.R.attr.state_pressed}, selected);
+        drawable.addState(new int[]{-android.R.attr.state_pressed}, unSelected);
+        return drawable;
     }
 
     public static View inflate(int layoutResID, ViewGroup parent) {

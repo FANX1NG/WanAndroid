@@ -35,7 +35,8 @@ public class BaseProtocol {
      * @param <T>                 泛型表示实体类
      */
     public <T> void execute(Observable<JsonObject> call, final int reqType,
-                            final HttpCallback callback, final Class<T> clazz, CompositeDisposable compositeDisposable, final int what) {
+                            final HttpCallback callback, final Class<T> clazz,
+                            CompositeDisposable compositeDisposable, final int what) {
         call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<JsonObject>() {

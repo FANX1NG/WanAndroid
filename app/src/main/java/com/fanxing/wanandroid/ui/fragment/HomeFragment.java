@@ -1,14 +1,17 @@
 package com.fanxing.wanandroid.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseFragment;
+import com.fanxing.wanandroid.ui.activity.SearchActivity;
 import com.fanxing.wanandroid.ui.adapter.HomeFragmentAdapter;
 import com.fanxing.wanandroid.util.LogUtil;
 import com.flyco.tablayout.SegmentTabLayout;
@@ -32,6 +35,9 @@ public class HomeFragment extends BaseFragment {
     SegmentTabLayout segmentTabLayout;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+    @BindView(R.id.btn_search)
+    Button btnSearch;
+
     private String[] mTabTitle = new String[]{"最新博文", "最新项目"};
     private List<Fragment> mFragmentList = new ArrayList<>();
 
@@ -57,12 +63,19 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initListener() {
-
+        btnSearch.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v, int id) {
-
+        switch (id) {
+            case R.id.btn_search:
+                Intent intent = new Intent(mActivity, SearchActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
     private void initTab() {
@@ -80,12 +93,12 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onTabSelect(int position) {
                 viewPager.setCurrentItem(position);
-                LogUtil.e(position+"  onTabSelect");
+                LogUtil.e(position + "  onTabSelect");
             }
 
             @Override
             public void onTabReselect(int position) {
-                LogUtil.e(position+"  onTabReselect");
+                LogUtil.e(position + "  onTabReselect");
             }
         });
         //监听ViewPager，TabLayout也进行切换
@@ -107,19 +120,6 @@ public class HomeFragment extends BaseFragment {
         });
 
 
-
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

@@ -19,11 +19,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * ArticleAdapter的Bannerholder类
+ * HomeArticleAdapter的Bannerholder类
  *
  * @author 繁星
  */
-public class BannerHolder extends BaseHolderRV<BannerBean> {
+public class HomeBannerHolder extends BaseHolderRV<BannerBean> {
 
 
     @BindView(R.id.banner)
@@ -31,7 +31,7 @@ public class BannerHolder extends BaseHolderRV<BannerBean> {
     private List<String> mImages;
     private List<String> mTitles;
 
-    public BannerHolder(Context context, ViewGroup parent, BaseAdapterRV adapter, int itemType) {
+    public HomeBannerHolder(Context context, ViewGroup parent, BaseAdapterRV adapter, int itemType) {
         super(context, parent, adapter, itemType, R.layout.item_home_banner);
     }
 

@@ -8,17 +8,17 @@ import android.widget.TextView;
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.ui.BaseAdapterRV;
 import com.fanxing.wanandroid.base.ui.BaseHolderRV;
-import com.fanxing.wanandroid.model.bean.ArticleListBean;
+import com.fanxing.wanandroid.model.bean.HomeProjectBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * ArticleAdapter的Articleholder类
+ * HomeProjectAdapter的Bannerholder类
  *
  * @author 繁星
  */
-public class ArticleHolder extends BaseHolderRV<ArticleListBean.DataBean.DatasBean> {
+public class HomeProjectHolder extends BaseHolderRV<HomeProjectBean.DataBean.DatasBean> {
     @BindView(R.id.tv_top)
     TextView tvTop;
     @BindView(R.id.tv_title)
@@ -30,7 +30,7 @@ public class ArticleHolder extends BaseHolderRV<ArticleListBean.DataBean.DatasBe
     @BindView(R.id.tv_niceDate)
     TextView tvNiceDate;
 
-    public ArticleHolder(Context context, ViewGroup parent, BaseAdapterRV adapter, int itemType) {
+    public HomeProjectHolder(Context context, ViewGroup parent, BaseAdapterRV adapter, int itemType) {
         super(context, parent, adapter, itemType, R.layout.item_home_list);
     }
 
@@ -42,7 +42,7 @@ public class ArticleHolder extends BaseHolderRV<ArticleListBean.DataBean.DatasBe
     }
 
     @Override
-    protected void onRefreshView(ArticleListBean.DataBean.DatasBean bean, int position) {
+    protected void onRefreshView(HomeProjectBean.DataBean.DatasBean bean, int position) {
         //为item设置数据
         tvChapter.setText(bean.getSuperChapterName() + "/" + bean.getChapterName());
         tvTitle.setText(bean.getTitle());

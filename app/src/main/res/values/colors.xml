@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="topColor">#cd3737</color>
     <color name="itemBackground">#ffffff</color>
+    <color name="text_color_gray">#ff163534</color>
+    <color name="green">#ff7546</color>
+    <color name="white">#ffffff</color>
 </resources>

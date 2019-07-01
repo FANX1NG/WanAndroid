@@ -14,11 +14,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * ArticleAdapter的Holder类
+ * HomeArticleAdapter的Holder类
  *
  * @author 繁星
  */
-public class TopHolder extends BaseHolderRV<TopBean.DataBean> {
+public class HomeTopHolder extends BaseHolderRV<TopBean.DataBean> {
     @BindView(R.id.tv_top)
     TextView tvTop;
     @BindView(R.id.tv_title)
@@ -30,7 +30,7 @@ public class TopHolder extends BaseHolderRV<TopBean.DataBean> {
     @BindView(R.id.tv_niceDate)
     TextView tvNiceDate;
 
-    public TopHolder(Context context, ViewGroup parent, BaseAdapterRV adapter, int itemType) {
+    public HomeTopHolder(Context context, ViewGroup parent, BaseAdapterRV adapter, int itemType) {
         super(context, parent, adapter, itemType, R.layout.item_home_list);
     }
 

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseFragment;
@@ -16,8 +17,7 @@ import com.fanxing.wanandroid.model.bean.BannerBean;
 import com.fanxing.wanandroid.model.bean.TopBean;
 import com.fanxing.wanandroid.presenter.HomeArticleFragmentPresenter;
 import com.fanxing.wanandroid.protocol.RetrofitService;
-import com.fanxing.wanandroid.ui.adapter.ArticleAdapter;
-import com.fanxing.wanandroid.util.LogUtil;
+import com.fanxing.wanandroid.ui.adapter.HomeArticleAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -27,18 +27,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
  * 首页最新文章
+ *
  * @author 繁星
  */
 public class HomeArticleFragment extends BaseFragment {
-    @BindView(R.id.rv_article)
-    RecyclerView rvArticle;
+
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    private ArticleAdapter mAdapter;
+    @BindView(R.id.tv_loading)
+    TextView tvLoading;
+    Unbinder unbinder;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    private HomeArticleAdapter mAdapter;
     private HomeArticleFragmentPresenter mPresenter;
     private List<Object> datas;
     private int pageNo = -1;
@@ -66,10 +73,10 @@ public class HomeArticleFragment extends BaseFragment {
      */
     private void initRecyclerView() {
         //设置布局方式
-        rvArticle.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         //准备适配器
-        mAdapter = new ArticleAdapter(getContext(), null);
-        rvArticle.setAdapter(mAdapter);
+        mAdapter = new HomeArticleAdapter(getContext(), null);
+        recyclerView.setAdapter(mAdapter);
     }
 
     /**
@@ -85,7 +92,7 @@ public class HomeArticleFragment extends BaseFragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mPresenter.getArticleList(pageNo+1);
+                mPresenter.getArticleList(pageNo + 1);
             }
         });
     }
@@ -106,15 +113,10 @@ public class HomeArticleFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        return rootView;
-    }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         mPresenter.onStop();
     }
 
@@ -126,8 +128,6 @@ public class HomeArticleFragment extends BaseFragment {
             datas = new ArrayList<>();
             //添加第一个元素
             datas.add(bannerBean);
-            //设置网络请求到的数据
-            mAdapter.setDatas(datas);
             //当请求Banner信息成功，再获取顶置文章信息
             mPresenter.getTopData();
             return;
@@ -138,7 +138,6 @@ public class HomeArticleFragment extends BaseFragment {
             List<TopBean.DataBean> data = topBean.getData();
             datas.addAll(data);
             mHeaderSize = datas.size();
-            mAdapter.setDatas(datas);
             //设置页码为0
             pageNo = 0;
             mPresenter.getArticleList(pageNo);
@@ -157,19 +156,32 @@ public class HomeArticleFragment extends BaseFragment {
                 pageDatas.addAll(data);
                 datas = pageDatas;
                 refreshLayout.finishRefresh(true);
-            }else{
+            } else {
                 //分页加载追加数据
                 datas.addAll(data);
                 refreshLayout.finishLoadMore(true);
+                //分页加载成功后，页码加一
                 pageNo++;
             }
+            //设置网络请求到的数据
             mAdapter.setDatas(datas);
-
+            //初次加载数据成功后，将加载页隐藏
+            if (tvLoading.getVisibility() == View.VISIBLE) {
+                tvLoading.setVisibility(View.GONE);
+            }
         }
     }
 
     @Override
     public void onHttpError(int reqType, String error) {
         super.onHttpError(reqType, error);
+        //数据请求失败，要将刷新控件关闭
+        refreshLayout.finishLoadMore();
+        refreshLayout.finishRefresh();
+        //初次加载数据失败，将加载页内容换成加载失败
+        if (tvLoading.getVisibility() == View.VISIBLE) {
+            tvLoading.setText(R.string.loading_err_text);
+        }
     }
+
 }
