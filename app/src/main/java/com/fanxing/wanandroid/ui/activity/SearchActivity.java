@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -181,20 +182,45 @@ public class SearchActivity extends BaseActivity {
     public void initListener() {
         btnSearch.setOnClickListener(this);
         etSearch.setOnClickListener(this);
+        etSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (i == KeyEvent.KEYCODE_ENTER) {
+                    search();
+                }else if (i==KeyEvent.KEYCODE_BACK){
+                    finish();
+                }
+                return true;
+
+            }
+        });
+    }
+
+
+    public void search() {
+        if (!etSearch.getText().toString().trim().equals("")) {
+            if (llSearchKey.getVisibility() == View.VISIBLE) {
+                llSearchKey.setVisibility(View.GONE);
+                btnSearch.setVisibility(View.GONE);
+                searchRefreshRecycler.setVisibility(View.VISIBLE);
+                etSearch.setGravity(Gravity.CENTER);
+                //隐藏光标
+                etSearch.setCursorVisible(false);
+                refreshLayout.autoRefresh();
+                InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                //隐藏软键盘 //
+                imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+            }
+        }else{
+            showToast("搜索内容为空");
+        }
     }
 
     @Override
     public void onClick(View v, int id) {
         switch (id) {
             case R.id.btn_search:
-                if (llSearchKey.getVisibility() == View.VISIBLE) {
-                    llSearchKey.setVisibility(View.GONE);
-                    searchRefreshRecycler.setVisibility(View.VISIBLE);
-                    refreshLayout.autoRefresh();
-                    InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    //隐藏软键盘 //
-                    imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
-                }
+                search();
                 break;
             case R.id.et_search:
                 if (llSearchKey.getVisibility() == View.GONE) {
@@ -209,6 +235,12 @@ public class SearchActivity extends BaseActivity {
                         public void onAnimationStart(Animator animator) {
                             searchRefreshRecycler.setVisibility(View.GONE);
                             llSearchKey.setVisibility(View.VISIBLE);
+                            btnSearch.setVisibility(View.VISIBLE);
+                            etSearch.setGravity(Gravity.LEFT);
+                            //显示光标
+                            etSearch.setCursorVisible(true);
+                            String s = etSearch.getText().toString();
+                            etSearch.setSelection(s.length());
                         }
 
                         @Override
@@ -253,6 +285,8 @@ public class SearchActivity extends BaseActivity {
             if (msg.what == 0) {
                 if (total == 0) {
                     tvLoading.setText(R.string.query_null);
+                    showToast("搜索结果为空");
+                    refreshLayout.finishRefresh();
                 } else {
                     mDatas = new ArrayList<>();
                     mDatas.clear();
