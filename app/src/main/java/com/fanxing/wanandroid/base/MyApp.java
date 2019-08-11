@@ -10,12 +10,13 @@ import com.squareup.leakcanary.RefWatcher;
  * @author 繁星
  */
 public class MyApp extends Application {
-
     private RefWatcher refWatcher;
+    private static Context mContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
         //全局公共类初始化
         Global.init(this);
         //Leakcanar内存溢出检测  初始化
@@ -35,5 +36,9 @@ public class MyApp extends Application {
     public static RefWatcher getRefWatcher(Context context) {
         MyApp myApp = (MyApp) context.getApplicationContext();
         return myApp.refWatcher;
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 }

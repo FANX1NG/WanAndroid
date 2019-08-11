@@ -2,16 +2,17 @@ package com.fanxing.wanandroid.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseActivity;
 import com.fanxing.wanandroid.base.Global;
+import com.fanxing.wanandroid.model.bean.TreeBean;
+import com.fanxing.wanandroid.ui.adapter.ViewPagerFragmentAdapter;
 import com.fanxing.wanandroid.ui.fragment.HomeFragment;
 import com.fanxing.wanandroid.ui.fragment.LoginFragment;
+import com.fanxing.wanandroid.ui.fragment.NaviFragment;
+import com.fanxing.wanandroid.ui.fragment.TreeFragment;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import butterknife.BindView;
@@ -22,6 +23,7 @@ import butterknife.Unbinder;
  * @author 繁星
  */
 public class MainActivity extends BaseActivity {
+
 
     @BindView(R.id.navigation_bar)
     BottomTabBar navigationBar;
@@ -42,10 +44,10 @@ public class MainActivity extends BaseActivity {
                 .setFontSize(16)
                 .setTabPadding(5, 0, 5)
                 .setChangeColor(Color.parseColor("#FF00F0"),Color.parseColor("#CCCCCC"))
-                .addTabItem("首页", R.mipmap.ic_launcher, LoginFragment.class)
-                .addTabItem("第二项",  R.mipmap.ic_launcher, HomeFragment.class)
-                .addTabItem("第三项",  R.mipmap.ic_launcher, LoginFragment.class)
-                .addTabItem("我的",R.mipmap.ic_launcher,HomeFragment.class)
+                .addTabItem("首页", R.mipmap.ic_launcher, HomeFragment.class)
+                .addTabItem("体系",  R.mipmap.ic_launcher, TreeFragment.class)
+                .addTabItem("分类",  R.mipmap.ic_launcher, NaviFragment.class)
+                .addTabItem("我的",R.mipmap.ic_launcher,LoginFragment.class)
                 .isShowDivider(true);
 
     }
@@ -56,14 +58,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
     }
 
     @Override
     public void onClick(View v, int id) {
 
-    }
 
+    }
 
     @Override
     protected void onDestroy() {
@@ -71,5 +72,6 @@ public class MainActivity extends BaseActivity {
         //解除绑定防止内存溢出
         mBind.unbind();
     }
+
 
 }

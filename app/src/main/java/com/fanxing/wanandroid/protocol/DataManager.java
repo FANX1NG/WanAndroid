@@ -1,13 +1,18 @@
 package com.fanxing.wanandroid.protocol;
 
+import android.text.Html;
+
 import com.fanxing.wanandroid.base.HttpCallback;
 import com.fanxing.wanandroid.model.bean.ArticleListBean;
 import com.fanxing.wanandroid.model.bean.BannerBean;
 import com.fanxing.wanandroid.model.bean.HomeProjectBean;
 import com.fanxing.wanandroid.model.bean.HotKeyBean;
 import com.fanxing.wanandroid.model.bean.LoginBean;
+import com.fanxing.wanandroid.model.bean.NaviBean;
 import com.fanxing.wanandroid.model.bean.QueryBean;
 import com.fanxing.wanandroid.model.bean.TopBean;
+import com.fanxing.wanandroid.model.bean.TreeArticleBean;
+import com.fanxing.wanandroid.model.bean.TreeBean;
 import com.youth.banner.Banner;
 
 import java.util.Map;
@@ -91,5 +96,33 @@ public class DataManager extends BaseProtocol{
      */
     public void getQueryData(HttpCallback callback,CompositeDisposable compositeDisposable,int page,String k){
         super.execute(mRetrofitService.getQueryData(page,k),RetrofitService.HTTP_POST_QUERY,callback, QueryBean.class,compositeDisposable,page);
+    }
+
+    /**
+     * 请求知识体系树数据
+     * @param callback 回调接口
+     * @param compositeDisposable 请求管理器
+     */
+    public void getTree(HttpCallback callback,CompositeDisposable compositeDisposable){
+        super.execute(mRetrofitService.getTree(),RetrofitService.HTTP_GET_TREE,callback, TreeBean.class,compositeDisposable);
+    }
+    /**
+     * 请求知识体系下的文章
+     * @param callback 回调接口
+     * @param compositeDisposable 请求管理器
+     * @param page 页码
+     * @param cid cid
+     */
+    public void getTreeArticle(HttpCallback callback,CompositeDisposable compositeDisposable,int page,int cid){
+        super.execute(mRetrofitService.getTreeArticle(page,cid),RetrofitService.HTTP_GET_TREE_ARTICLE,callback, TreeArticleBean.class,compositeDisposable,page);
+    }
+
+    /**
+     * 请求导航数据
+     * @param callback 回调接口
+     * @param compositeDisposable 请求管理器
+     */
+    public void getNaviData(HttpCallback callback,CompositeDisposable compositeDisposable){
+        super.execute(mRetrofitService.getNaviData(),RetrofitService.HTTP_GET_NAVI,callback, NaviBean.class,compositeDisposable);
     }
 }

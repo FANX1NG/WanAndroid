@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class BaseAdapterLV<T> extends BaseAdapter {
 
     private Context context;
-    private List<T> listData;
+    public List<T> listData;
 
     public BaseAdapterLV(Context context, List<T> listData) {
         this.context = context;

@@ -30,7 +30,6 @@ import butterknife.Unbinder;
  * @author 繁星
  */
 public class HomeFragment extends BaseFragment {
-    Unbinder unbinder;
     @BindView(R.id.segmentTabLayout)
     SegmentTabLayout segmentTabLayout;
     @BindView(R.id.viewPager)

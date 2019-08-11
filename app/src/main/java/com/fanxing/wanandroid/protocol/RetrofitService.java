@@ -12,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * @author 繁星
@@ -49,8 +50,19 @@ public interface RetrofitService {
      * 搜索结果类型
      */
     int HTTP_POST_QUERY = 7;
+    /**
+     * 知识体系树
+     */
+    int HTTP_GET_TREE = 8;
+    /**
+     * 知识体系下的文章
+     */
+    int HTTP_GET_TREE_ARTICLE = 9;
 
-
+    /**
+     *  导航数据
+     */
+    int HTTP_GET_NAVI=10;
 
     /**
      * 请求首页文章
@@ -108,12 +120,37 @@ public interface RetrofitService {
 
     /**
      * 搜索结果
+     *
      * @param page 页码
-     * @param k 搜索内容
+     * @param k    搜索内容
      * @return 搜索结果数据
      */
     @POST("article/query/{page}/json")
     @FormUrlEncoded
     Observable<JsonObject> getQueryData(@Path("page") int page, @Field("k") String k);
+
+    /**
+     * 知识体系
+     *
+     * @return 体系
+     */
+    @GET("tree/json")
+    Observable<JsonObject> getTree();
+
+    /**
+     * 体系下的文章
+     * @param page 页码
+     * @param cid 分支的id
+     * @return 文章
+     */
+    @GET("article/list/{page}/json")
+    Observable<JsonObject> getTreeArticle(@Path("page") int page,@Query("cid") int cid);
+
+    /**
+     * 导航
+     * @return 导航数据
+     */
+    @GET("navi/json")
+    Observable<JsonObject> getNaviData();
 }
 

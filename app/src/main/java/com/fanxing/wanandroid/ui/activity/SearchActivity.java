@@ -2,13 +2,11 @@ package com.fanxing.wanandroid.ui.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -29,14 +26,11 @@ import android.widget.TextView;
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseActivity;
 import com.fanxing.wanandroid.base.Global;
-import com.fanxing.wanandroid.model.bean.HomeProjectBean;
 import com.fanxing.wanandroid.model.bean.HotKeyBean;
 import com.fanxing.wanandroid.model.bean.QueryBean;
 import com.fanxing.wanandroid.presenter.SearchActivityPresenter;
 import com.fanxing.wanandroid.protocol.RetrofitService;
-import com.fanxing.wanandroid.ui.adapter.HomeProjectAdapter;
 import com.fanxing.wanandroid.ui.adapter.QueryAdapter;
-import com.fanxing.wanandroid.util.LogUtil;
 import com.fanxing.wanandroid.view.SearchKeyLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -93,6 +87,10 @@ public class SearchActivity extends BaseActivity {
         mBind = ButterKnife.bind(this);
         initSmartRefreshLayout();
         initRecyclerView();
+        //editText获取焦点
+        etSearch.setFocusable(true);
+        etSearch.setFocusableInTouchMode(true);
+        etSearch.requestFocus();
     }
 
     /**
@@ -128,7 +126,6 @@ public class SearchActivity extends BaseActivity {
             }
         });
     }
-
 
     private void displaySearchKey(SearchKeyLayout searchKeyLayout, List<String> mDatas) {
 
@@ -187,7 +184,7 @@ public class SearchActivity extends BaseActivity {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if (i == KeyEvent.KEYCODE_ENTER) {
                     search();
-                }else if (i==KeyEvent.KEYCODE_BACK){
+                } else if (i == KeyEvent.KEYCODE_BACK) {
                     finish();
                 }
                 return true;
@@ -211,7 +208,7 @@ public class SearchActivity extends BaseActivity {
                 //隐藏软键盘 //
                 imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
             }
-        }else{
+        } else {
             showToast("搜索内容为空");
         }
     }

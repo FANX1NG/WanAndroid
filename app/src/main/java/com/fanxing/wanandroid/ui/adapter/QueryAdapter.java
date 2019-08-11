@@ -10,6 +10,7 @@ import com.fanxing.wanandroid.ui.holder.QueryHolder;
 import java.util.List;
 
 /**
+ * 搜索结果的RecyclerView适配器
  * @author 繁星
  */
 public class QueryAdapter extends BaseAdapterRV {

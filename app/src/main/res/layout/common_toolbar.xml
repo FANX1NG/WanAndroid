@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
+    app:layout_scrollFlags="scroll|enterAlways"
     android:background="?attr/colorPrimary">
 
     <android.support.constraint.ConstraintLayout
@@ -13,17 +14,17 @@
             android:id="@+id/segmentTabLayout"
             android:layout_width="160dp"
             android:layout_height="32dp"
-            tl:layout_constraintBottom_toBottomOf="parent"
-            tl:layout_constraintEnd_toEndOf="parent"
-            tl:layout_constraintStart_toStartOf="parent"
-            tl:layout_constraintTop_toTopOf="parent"
-            tl:tl_bar_color="#ffffff"
-            tl:tl_indicator_anim_enable="true"
-            tl:tl_indicator_color="@color/colorPrimary"
-            tl:tl_indicator_margin_bottom="2dp"
-            tl:tl_indicator_margin_left="2dp"
-            tl:tl_indicator_margin_right="2dp"
-            tl:tl_indicator_margin_top="2dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tl_bar_color="#ffffff"
+            app:tl_indicator_anim_enable="true"
+            app:tl_indicator_color="@color/colorPrimary"
+            app:tl_indicator_margin_bottom="2dp"
+            app:tl_indicator_margin_left="2dp"
+            app:tl_indicator_margin_right="2dp"
+            app:tl_indicator_margin_top="2dp">
 
         </com.flyco.tablayout.SegmentTabLayout>
 
@@ -35,9 +36,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Button"
-            tl:layout_constraintBottom_toBottomOf="parent"
-            tl:layout_constraintEnd_toEndOf="parent"
-            tl:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

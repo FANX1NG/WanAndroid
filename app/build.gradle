@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.fanxing.wanandroid"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -63,4 +63,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //Banner实现
     implementation 'com.youth.banner:banner:1.4.10'
+    //列表有带头部的列表
+    implementation 'se.emilsjolander:stickylistheaders:2.7.0'
 }

@@ -2,10 +2,17 @@ package com.fanxing.wanandroid.protocol;
 
 import android.content.Context;
 
+import com.fanxing.wanandroid.base.MyApp;
+import com.fanxing.wanandroid.protocol.cookie.CookieJarImpl;
+import com.fanxing.wanandroid.protocol.cookie.PersistentCookieStore;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -60,7 +67,7 @@ public class RetrofitHelper {
         builder.readTimeout(DEFAULT_READ_TIME_OUT,TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
-
+        builder.cookieJar(new CookieJarImpl(new PersistentCookieStore(MyApp.getContext())));
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(RetrofitService.HOST_URL)

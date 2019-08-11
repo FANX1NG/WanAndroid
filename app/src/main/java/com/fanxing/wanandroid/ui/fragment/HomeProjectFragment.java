@@ -120,8 +120,11 @@ public class HomeProjectFragment extends BaseFragment {
             HomeProjectBean homeProjectBean = (HomeProjectBean) msg.obj;
             List<HomeProjectBean.DataBean.DatasBean> homeProjectData = homeProjectBean.getData().getDatas();
             if (msg.what==0){
-                mDatas = new ArrayList<>();
-                mDatas.clear();
+                if (mDatas==null){
+                    mDatas = new ArrayList<>();
+                }else{
+                    mDatas.clear();
+                }
                 mDatas.addAll(homeProjectData);
                 refreshLayout.finishRefresh();
                 pageNo=0;
