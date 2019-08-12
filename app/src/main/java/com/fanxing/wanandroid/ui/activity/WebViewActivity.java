@@ -2,6 +2,7 @@ package com.fanxing.wanandroid.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.fanxing.wanandroid.R;
 import com.fanxing.wanandroid.base.BaseActivity;
+import com.fanxing.wanandroid.ui.fragment.ShareDialogFragment;
 import com.fanxing.wanandroid.util.LogUtil;
 
 import butterknife.BindView;
@@ -43,6 +45,8 @@ public class WebViewActivity extends BaseActivity {
     ProgressBar progressBar;
     private Unbinder mBind;
     private WebView mWebView;
+    private String mWebUrl;
+    private String mTitle;
 
     @Override
     public int getLayoutRes() {
@@ -54,15 +58,15 @@ public class WebViewActivity extends BaseActivity {
         //ButterKnife绑定
         mBind = ButterKnife.bind(this);
         Intent intent = getIntent();
-        String title = intent.getStringExtra(WEB_VIEW_TITLE);
-        tvTitle.setText(title);
+        mTitle = intent.getStringExtra(WEB_VIEW_TITLE);
+        tvTitle.setText(mTitle);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         mWebView = new WebView(getApplicationContext());
         setDefaultWebSettings(mWebView);
         mWebView.setLayoutParams(params);
         webFrame.addView(mWebView);
-        String webUrl = intent.getStringExtra(WEB_VIEW_URL);
-        mWebView.loadUrl(webUrl);
+        mWebUrl = intent.getStringExtra(WEB_VIEW_URL);
+        mWebView.loadUrl(mWebUrl);
     }
 
     @Override
@@ -73,11 +77,27 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public void initListener() {
         btnBack.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
+        btnCollect.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v, int id) {
+        switch (id) {
+            case R.id.btn_share:
+                ShareDialogFragment dialog = new ShareDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(WEB_VIEW_TITLE,mTitle);
+                bundle.putString(WEB_VIEW_URL,mWebUrl);
+                dialog.setArguments(bundle);
+                dialog.show(getSupportFragmentManager(), "shareDialog");
+                break;
+            case R.id.btn_collect:
 
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -98,10 +118,10 @@ public class WebViewActivity extends BaseActivity {
     public void setDefaultWebSettings(WebView webView) {
         WebSettings webSettings = webView.getSettings();
 
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                LogUtil.e(newProgress+"");
+                LogUtil.e(newProgress + "");
                 if (newProgress == 100) {
                     progressBar.setVisibility(View.GONE);
                 } else {

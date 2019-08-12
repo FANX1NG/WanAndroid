@@ -8,4 +8,6 @@
     <string name="search_history">历史记录</string>
     <string name="seatch_text">搜索</string>
     <string name="query_null">没有搜索到结果</string>
+    <string name="share_friend">分享给朋友</string>
+    <string name="share_browser">用浏览器打开</string>
 </resources>
